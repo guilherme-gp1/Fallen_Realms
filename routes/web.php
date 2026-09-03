@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario']);
+Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);

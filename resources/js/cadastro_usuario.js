@@ -1,5 +1,33 @@
-$(document).ready(function (){
-    $('#cadastro_usuario').click(function (){
-        alert('Cadastro de usuário clicado!');
+$(document).ready(function () {
+
+    $('#cadastro_usuario').click(function () {
+        $.ajax({
+            url: 'api/cadastro_usuario',
+            type: 'POST',
+            data: {
+                nome: $('#nome').val(),
+                email: $('#email').val(),
+                senha: $('#senha').val(),
+                data_nascimento: $('#data_nascimento').val(),
+                cpf: $('#cpf').val(),
+            },
+            success: function (response) {
+                if (response['erro'] == 'n') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: 'Usuário cadastrado com sucesso!',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: response['mensagem'],
+                    });
+                }
+            }
+        });
+
     });
+
 });
