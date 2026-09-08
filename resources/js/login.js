@@ -1,24 +1,21 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $('#cadastro_usuario').click(function () {
+    $('#login_usuario').click(function() {
         $.ajax({
-            url: 'api/cadastro',
+            url: 'api/login',
             type: 'POST',
             data: {
-                nome: $('#nome').val(),
                 email: $('#email').val(),
                 senha: $('#senha').val(),
-                data_nascimento: $('#data_nascimento').val(),
-                cpf: $('#cpf').val(),
             },
-            success: function (response) {
+            success: function(response) {
                 if (response['erro'] == 'n') {
                     Swal.fire({
                         icon: 'success',
                         title: 'Sucesso!',
-                        text: 'Usuário cadastrado com sucesso!',
+                        text: 'Login realizado com sucesso!',
                     }).then(() => {
-                        window.location.href = '/login';
+                        window.location.href = '/menu_principal';
                     });
                 } else {
                     Swal.fire({
@@ -29,7 +26,6 @@ $(document).ready(function () {
                 }
             }
         });
-
     });
 
 });
