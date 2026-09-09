@@ -74,10 +74,14 @@
                     <label for="cpf">CPF</label>
                 </div>
 
-                <div class="justify-content-center d-flex mt-3">
-                    <button id="cadastro_usuario" type="button" class="btn btn-primary">
+                <div class="justify-content-center d-flex mt-4">
+                    <button id="cadastro_usuario" type="button" class="btn btn-primary rounded-5 px-4">
                         Cadastrar
                     </button>
+                </div>
+
+                <div class="text-center mt-3">
+                    <span>Já tem uma conta? <a href="/login">Entrar</a></span>
                 </div>
             </div>
 

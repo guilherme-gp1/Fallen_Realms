@@ -7,11 +7,13 @@ use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
-    public function cadastro_usuario_html (Request $request){
+    public function cadastro_usuario_html(Request $request)
+    {
         return view('cadastro_usuario');
     }
 
-    public function cadastro_usuario_post (Request $request){
+    public function cadastro_usuario_post(Request $request)
+    {
         $request->validate([
             'nome' => 'required|string|max:255',
             'email' => 'required',
@@ -22,14 +24,14 @@ class UsuarioController extends Controller
 
         $usuario = new Usuario();
 
-        if($usuario->where('email', "=", $request->email)->exists()){
+        if ($usuario->where('email', "=", $request->email)->exists()) {
             return response()->json(['erro' => 's', 'mensagem' => 'Email já cadastrado'], 200);
         }
 
         try {
             $usuario->nome = $request->nome;
             $usuario->email = $request->email;
-            $usuario->senha = bcrypt($request->senha);
+            $usuario->senha = md5($request->senha);
             $usuario->cpf = $request->cpf;
             $usuario->data_nascimento = $request->data_nascimento;
             $usuario->save();
