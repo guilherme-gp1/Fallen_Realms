@@ -1,27 +1,17 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Classes e Habilidades</title>
-
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    @vite(['resources/js/classe_habilidade.js'])
 </head>
-
 <body>
-
 <div class="container py-5">
 
     <h1 class="mb-4">
@@ -54,6 +44,7 @@
 
                     <option value="{{ $classe->id }}">
                         {{ $classe->nome }}
+                        ID:{{ $classe->id }}
                     </option>
 
                 @endforeach
@@ -166,33 +157,6 @@
     </div>
 
 </div>
-
-
-<script>
-
-$('#salvar').click(function() {
-
-    let classe_id = $('#classe_id').val();
-
-    let habilidades = [];
-
-    $('.habilidade:checked').each(function() {
-
-        habilidades.push($(this).val());
-
-    });
-
-
-    console.log('Classe:', classe_id);
-
-    console.log('Habilidades:', habilidades);
-
-});
-
-</script>
-
-
 </body>
-
 </html>
-```
+

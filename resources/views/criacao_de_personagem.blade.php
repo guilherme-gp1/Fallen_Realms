@@ -100,53 +100,17 @@
                             <select id="raca"
                                 class="form-select rounded-5">
 
-                                <option value="">
-                                    Escolha uma raça
+                                <option value="Escolha_r">
+                                    Escolha Uma Raça
                                 </option>
 
-                                <option value="humano">
-                                    Humano
+                                @foreach($racas as $raca)
+
+                                <option value="{{ $raca->id }}">
+                                    {{ $raca->nome }}
                                 </option>
 
-                                <option value="elfo">
-                                    Elfo
-                                </option>
-
-                                <option value="anao">
-                                    Anão
-                                </option>
-
-                                <option value="orc">
-                                    Orc
-                                </option>
-
-                                <option value="Halflings">
-                                    Halflings
-                                </option>
-
-                                <option value="Draconatos">
-                                    Draconatos
-                                </option>
-
-                                <option value="Minotauros">
-                                    Minotauros
-                                </option>
-
-                                <option value="Gigante">
-                                    Gigante
-                                </option>
-
-                                <option value="Zumbi">
-                                    Zumbi
-                                </option>
-
-                                <option value="Lobisomens">
-                                    Lobisomens
-                                </option>
-
-                                <option value="Goblins">
-                                    Goblins
-                                </option>
+                                @endforeach
 
                             </select>
 
@@ -172,55 +136,39 @@
                             <select id="classe"
                                 class="form-select rounded-5">
 
-                                <option value="">
-                                    Escolha uma classe
+
+                                <option value="Escolha">
+                                    Escolha Uma Classe
                                 </option>
 
-                                <option value="guerreiro">
-                                    Guerreiro
+                                @foreach($classes as $classe)
+
+                                <option value="{{ $classe->id }}">
+                                    {{ $classe->nome }}
                                 </option>
 
-                                <option value="barbaro">
-                                    Bárbaro
-                                </option>
-
-                                <option value="mago">
-                                    Mago
-                                </option>
-
-                                <option value="paladino">
-                                    Paladino
-                                </option>
-
-                                <option value="ranger">
-                                    Ranger
-                                </option>
-
-                                <option value="arqueiro">
-                                    Arqueiro
-                                </option>
-
-                                <option value="bardo">
-                                    Bardo
-                                </option>
-
-                                <option value="clerigo">
-                                    Clérigo
-                                </option>
-
-                                <option value="Druida">
-                                    Druida
-                                </option>
-
-                                <option value="bruxo">
-                                    Bruxo
-                                </option>
-
-                                <option value="ladino">
-                                    Ladino
-                                </option>
-
+                                @endforeach
                             </select>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Habilidade -->
+
+                    <div class="card bg-black border-secondary rounded-5 mt-4">
+
+                        <div class="card-body p-4">
+
+                            <h4 class="text-warning fw-bold mb-3">
+                                Habilidades da Classe
+                            </h4>
+
+                            <div id="habilidades_classe">
+                                <p class="text-secondary">
+                                    Escolha uma classe para ver suas habilidades.
+                                </p>
+                            </div>
 
                         </div>
 

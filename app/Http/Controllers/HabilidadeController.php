@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Habilidade;
+use App\Models\Classe;
 
 class HabilidadeController extends Controller
 {
@@ -44,14 +45,5 @@ class HabilidadeController extends Controller
         }
     }
 
-    public function puxar_habilidades_get(Request $request)
-    {
-        $habilidades = Habilidade::all();
-
-        $data = [
-            'habilidades' => $habilidades
-        ];
-
-        return view('Criacao_de_Classe_Habilidade', $data);
-    }
+   
 }
