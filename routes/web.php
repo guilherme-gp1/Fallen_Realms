@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PersonagemController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,4 +19,5 @@ Route::get('/criar_personagem', function () {
 
 
 Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);
+Route::get('/criar_personagem', [PersonagemController::class, 'cadastro_personagem_html']);
 Route::get('/login', [LoginController::class, 'login_usuario_html']);
