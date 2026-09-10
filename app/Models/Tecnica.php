@@ -12,9 +12,10 @@ class Tecnica extends Model
         'nome',
         'descricao',
         'tipo',
-        'valor',
+        'dano',
         'custo',
         'cooldown',
+        'nivel_minimo'
     ];
 
     public function personagens()

@@ -14,7 +14,7 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login_cadastro_usuario(Request $request){
+    public function login_usuario_post(Request $request){
         $request->validate([
             'email' => 'required',
             'senha' => 'required',

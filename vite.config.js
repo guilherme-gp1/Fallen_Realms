@@ -10,7 +10,12 @@ export default defineConfig({
                 'resources/css/cadastro.css', 
                 'resources/js/login.js',
                 'resources/js/menu_principal.js',
-                'resources/js/criacao_personagem.js',],
+                'resources/js/criacao_personagem.js',
+                'resources/js/cadastro_habilidade.js',
+                'resources/js/cadastro_tecnica.js',
+                'resources/js/cadastro_classe.js',
+                'resources/js/cadastro_raca.js'
+                ],
             refresh: true,
             fonts: [
                 bunny('Instrument Sans', {

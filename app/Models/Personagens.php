@@ -11,7 +11,7 @@ class Personagens extends Model
 
     protected $fillable = [
         'user_id',
-        'nome',
+        'nome', 
         'raca_id',
         'classe_id',
         'forca',
