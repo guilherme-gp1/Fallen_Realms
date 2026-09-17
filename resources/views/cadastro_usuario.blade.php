@@ -21,55 +21,44 @@
     </style>
 </head>
 
-<body>
-    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+<body style="
+    background-image: url('{{ asset('img/background-login.png') }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+">
+    <div class="container-fluid min-vh-100 d-flex align-items-center">
 
-        <div class="row bg-white rounded-4 shadow overflow-hidden"
-            style="max-width: 1000px; width: 100%;">
+        <div class=" row bg-white justify-content-center align-items-center w-25 vh-100 shadow overflow-hidden">
+            <div class="col-md-10 p-6">
 
-            <div class="col-md-6 bg-dark text-white d-flex flex-column justify-content-center align-items-center p-5">
-                <div>
-                    <div class="circulo"></div>
-                </div>
-
-                <h2 class="fw-bold text-center">
-                    Crie sua conta
-                </h2>
-
-                <p class="text-center text-light">
-                    Preencha seus dados para começar.
-                </p>
-            </div>
-
-            <div class="col-md-6 p-4">
-                <div class="justify-content-center d-flex">
-                    <div class="circulo"></div>
-                </div>
+                <h2 class="fw-bold text-center">Fazer Cadastro</h2>
 
                 <div class="campo-flutuante mt-3">
-                    <input type="text" class="form-control rounded-5" id="nome" name="nome"
+                    <input type="text" class="form-control rounded-4" id="nome" name="nome"
                         placeholder="">
                     <label for="nome">Nome</label>
                 </div>
 
                 <div class="campo-flutuante mt-3">
-                    <input type="email" class="form-control rounded-5" id="email" name="email"
+                    <input type="email" class="form-control rounded-4" id="email" name="email"
                         placeholder="">
                     <label for="email">Email</label>
                 </div>
 
                 <div class="campo-flutuante mt-3">
-                    <input type="password" class="form-control rounded-5" id="senha" name="senha"
+                    <input type="password" class="form-control rounded-4" id="senha" name="senha"
                         placeholder="">
                     <label for="senha">Senha</label>
                 </div>
 
                 <div class="campo-flutuante mt-3">
-                    <input type="date" class="form-control rounded-5" id="data_nascimento" name="data_nascimento">
+                    <input type="date" class="form-control rounded-4" id="data_nascimento" name="data_nascimento">
                 </div>
 
                 <div class="campo-flutuante mt-3">
-                    <input type="text" class="form-control rounded-5" id="cpf" name="cpf"
+                    <input type="text" class="form-control rounded-4" id="cpf" name="cpf"
                         placeholder="">
                     <label for="cpf">CPF</label>
                 </div>

@@ -1,3 +1,8 @@
+:root{
+    --fr-bg:#0c0b0a;
+    --fr-borda:#ffc107;
+}
+
 .campo-flutuante {
     position: relative;
 }

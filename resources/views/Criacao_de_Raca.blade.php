@@ -1,87 +1,143 @@
 <!DOCTYPE html>
-<html lang="pt-Br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Criação de Raças</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @vite(['resources/js/cadastro_raca.js'])
 </head>
 
-<body>
-    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+<body class="bg-light">
 
-        <div class="row bg-white rounded-4 shadow overflow-hidden"
-            style="max-width: 1000px; width: 100%;">
+    <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center p-3">
 
-            <div class="col-md-6 p-4">
-                <div class="justify-content-center d-flex">
+        <div class="row bg-white rounded-4 shadow-sm w-100"
+            style="max-width: 650px;">
+
+            <div class="col-12 p-4 p-md-5">
+
+                <!-- Título -->
+                <h2 class="text-center fw-bold mb-4">
+                    Criação de Raça
+                </h2>
+
+                <!-- Círculo -->
+                <div class="d-flex justify-content-center mb-4">
                     <div class="circulo"></div>
                 </div>
 
+                <!-- Nome -->
                 <div class="campo-flutuante mt-3">
-                    <input type="text" class="form-control rounded-5" id="nome" name="nome"
-                        placeholder="">
                     <label for="nome">Nome</label>
+                    <input type="text"
+                        class="form-control rounded-3"
+                        id="nome"
+                        name="nome"
+                        placeholder="">
                 </div>
 
+                <!-- Descrição -->
                 <div class="campo-flutuante mt-3">
-                    <input type="text" class="form-control rounded-5" id="descricao" name="descricao"
-                        placeholder="">
                     <label for="descricao">Descrição</label>
+                    <input type="text"
+                        class="form-control rounded-3"
+                        id="descricao"
+                        name="descricao"
+                        placeholder="">
                 </div>
 
+                <!-- Vida Base -->
                 <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="vida_base" name="vida_base"
-                        placeholder="">
                     <label for="vida_base">Vida Base</label>
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="vida_base"
+                        name="vida_base"
+                        placeholder="">
                 </div>
 
+                <!-- Bônus de Força -->
                 <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="bonus_forca" name="bonus_forca"
-                        placeholder="">
                     <label for="bonus_forca">Bônus de Força</label>
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="bonus_forca"
+                        name="bonus_forca"
+                        placeholder="">
                 </div>
 
+                <!-- Bônus de Vigor -->
                 <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="bonus_vigor" name="bonus_vigor"
-                        placeholder="">
                     <label for="bonus_vigor">Bônus de Vigor</label>
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="bonus_vigor"
+                        name="bonus_vigor"
+                        placeholder="">
                 </div>
 
+                <!-- Bônus de Agilidade -->
                 <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="bonus_agilidade" name="bonus_agilidade"
-                        placeholder="">
                     <label for="bonus_agilidade">Bônus de Agilidade</label>
-                </div>
-
-                <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="bonus_magia" name="bonus_magia"
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="bonus_agilidade"
+                        name="bonus_agilidade"
                         placeholder="">
-                    <label for="bonus_magia">Bônus de Magia</label>
+
                 </div>
 
+                <!-- Bônus de Magia -->
                 <div class="campo-flutuante mt-3">
-                    <input type="number" class="form-control rounded-5" id="bonus_inteligencia" name="bonus_inteligencia"
+                    <label for="bonus_agilidade">Bônus de Magia</label>
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="bonus_magia"
+                        name="bonus_magia"
                         placeholder="">
-                    <label for="bonus_inteligencia">Bônus de Inteligência</label>
                 </div>
 
+                <!-- Bônus de Inteligência -->
+                <div class="campo-flutuante mt-3">
+                    <label for="bonus_agilidade">Bônus de Inteligencia</label>
+                    <input type="number"
+                        class="form-control rounded-3"
+                        id="bonus_inteligencia"
+                        name="bonus_inteligencia"
+                        placeholder="">
+                </div>
 
-                <div class="justify-content-center d-flex mt-4">
-                    <button id="criar_raca" type="button" class="btn btn-primary rounded-5 px-4">
+                <!-- Botão -->
+                <div class="d-flex justify-content-center mt-4">
+                    <button id="criar_raca"
+                        type="button"
+                        class="btn btn-warning text-dark rounded-5 px-4 py-2 fw-bold">
                         Criar Raça
                     </button>
                 </div>
+
             </div>
 
         </div>
 
     </div>
+
 </body>
 
 </html>
