@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
     @vite(['resources/js/login.js', 'resources/css/cadastro.css'])
 
     <style>
@@ -33,7 +34,7 @@
         <div class=" row bg-white justify-content-center align-items-center w-25 vh-100 shadow overflow-hidden">
             <div class="col-md-10 p-6">
                 <h2 class=" fw-bold text-center">Fazer Login</h2>
-                
+
                 <div class="campo-flutuante mt-3">
                     <input type="email" class="form-control rounded-4" id="email" name="email"
                         placeholder="">

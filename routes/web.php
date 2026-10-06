@@ -9,18 +9,18 @@ use App\Http\Controllers\TecnicaController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\RacaController;
 use App\Http\Controllers\Classe_HabilidadeController;
+use App\Http\Middleware\LogadoMiddleware;
+use GuzzleHttp\Middleware;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LoginController::class, 'login_usuario_html']);
 
 Route::get('/menu_principal', function () {
     return view('menu_principal');
-});
+})->middleware(LogadoMiddleware::class);
 
 Route::get('/criar_personagem', function () {
     return view('criacao_de_personagem');
-});
+})->middleware(LogadoMiddleware::class);
 
 
 Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);
