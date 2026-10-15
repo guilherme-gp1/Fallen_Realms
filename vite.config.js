@@ -15,7 +15,8 @@ export default defineConfig({
                 'resources/js/cadastro_tecnica.js',
                 'resources/js/cadastro_classe.js',
                 'resources/js/cadastro_raca.js',
-                'resources/js/classe_habilidade.js'
+                'resources/js/classe_habilidade.js',
+                'resources/js/luzes.js'
                 ],
             refresh: true,
             fonts: [

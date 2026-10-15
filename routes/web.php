@@ -22,6 +22,10 @@ Route::get('/criar_personagem', function () {
     return view('criacao_de_personagem');
 })->middleware(LogadoMiddleware::class);
 
+Route::get('/luzes', function () {
+    return view('leds');
+})->middleware(LogadoMiddleware::class);
+
 
 Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);
 Route::get('/criar_personagem', [PersonagemController::class, 'cadastro_personagem_html']);
@@ -31,3 +35,4 @@ Route::get('/criar_classe', [ClassesController::class, 'cadastro_classe_html']);
 Route::get('/criar_raca', [RacaController::class, 'cadastro_raca_html']);
 Route::get('/puxar_habilidade', [Classe_HabilidadeController::class, 'cadastro_classe_habilidade_html']);
 Route::get('/login', [LoginController::class, 'login_usuario_html']);
+
