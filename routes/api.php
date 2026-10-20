@@ -10,6 +10,7 @@ use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\RacaController;
 use App\Http\Controllers\Classe_HabilidadeController;
 use App\Http\Controllers\PersonagemController;
+use App\Http\Controllers\Personagem_StatusController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -22,4 +23,5 @@ Route::post('/cadastro_tecnica', [TecnicaController::class, 'cadastro_tecnica_po
 Route::post('/cadastro_classe_habilidade', [Classe_HabilidadeController::class, 'cadastro_classe_habilidade_post']);
 Route::post('/cadastro_classe', [ClassesController::class, 'cadastro_classe_post']);
 Route::post('/cadastro_raca', [RacaController::class, 'cadastro_raca_post']);
-Route::get('/habilidades_classe/{classe_id}', [PersonagemController::class, 'puxar_habilidades_classe']);
+Route::post('/cadastro_personagem_status', [Personagem_StatusController::class, 'cadastro_personagem_status']);
+//Route::get('/habilidades_classe/{classe_id}', [Personagem_StatusController::class, 'puxar_habilidades_classe']);

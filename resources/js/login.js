@@ -19,6 +19,7 @@ $(document).ready(function () {
                     })
                     
                     $.cookie("token_usuario", response['token'], { expires: 7, path: '/' });
+                    $.cookie("user_id", response['user_id'], { expires: 7, path: '/' });
 
                     setTimeout(function () {
                        

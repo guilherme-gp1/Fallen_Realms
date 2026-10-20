@@ -19,7 +19,6 @@ class LogadoMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-
         if (Cookie::has('token_usuario')) {
 
        
@@ -34,7 +33,7 @@ class LogadoMiddleware
 
             if ($tokenUsuario) {
                 $usuario = Usuario::find($tokenUsuario->usuario_id);
-                $request->usuario = $usuario;
+                $request->$usuario = $usuario;
                 return $next($request);
             } else {
                 Cookie::forget('token_usuario');

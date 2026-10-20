@@ -1,98 +1,142 @@
 $(document).ready(function () {
 
-    $('#classe').change(function () {
+    var pontos = 5;
+    var forca = 10;
+    var vigor = 10;
+    var agilidade = 10;
+    var magia = 10;
+    var inteligencia = 10;
 
-        let classe_id = $(this).val();
-
-        $('#habilidades_classe').html(`
-            <p class="text-secondary">
-                Carregando habilidades...
-            </p>
-        `);
-
-        $.ajax({
-
-            url: '/api/habilidades_classe/' + classe_id,
-
-            type: 'GET',
-
-            success: function (habilidades) {
-
-                $('#habilidades_classe').empty();
-
-                if (habilidades.length === 0) {
-
-                    $('#habilidades_classe').html(`
-                        <p class="text-secondary">
-                            Essa classe não possui habilidades cadastradas.
-                        </p>
-                    `);
-
-                    return;
-                }
-
-                habilidades.forEach(function (habilidade) {
-
-                    $('#habilidades_classe').append(`
-                    
-                        <div class="card bg-dark border-secondary mb-3">
-                            
-                            <div class="card-body">
-
-                                <h5 class="text-warning">
-                                    ${habilidade.nome}
-                                </h5>
-
-                                <p class="text-secondary">
-                                    ${habilidade.descricao}
-                                </p>
-
-                                <small>
-
-                                    <strong>Tipo:</strong>
-                                    ${habilidade.tipo}
-
-                                    <br>
-
-                                    <strong>Valor:</strong>
-                                    ${habilidade.valor}
-
-                                    <br>
-
-                                    <strong>Custo:</strong>
-                                    ${habilidade.custo}
-
-                                    <br>
-
-                                    <strong>Cooldown:</strong>
-                                    ${habilidade.cooldown} segundos
-
-                                </small>
-
-                            </div>
-
-                        </div>
-
-                    `);
-
-                });
-
-            },
-
-            error: function (xhr) {
-
-                console.log(xhr.responseJSON);
-
-                $('#habilidades_classe').html(`
-                    <p class="text-danger">
-                        Erro ao carregar as habilidades.
-                    </p>
-                `);
-
-            }
-
-        });
-
+    $('#menos_forca').click(function () {
+        if (forca > 0) {
+            forca = forca - 1;
+            pontos = pontos + 1;
+            $('#forca').text(forca);
+            $('#pontos').text(pontos);
+        }
     });
 
+    $('#menos_vigor').click(function () {
+        if (vigor > 0) {
+            vigor = vigor - 1;
+            pontos = pontos + 1;
+            $('#vigor').text(vigor);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#menos_agilidade').click(function () {
+        if (agilidade > 0) {
+            agilidade = agilidade - 1;
+            pontos = pontos + 1;
+            $('#agilidade').text(agilidade);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#menos_magia').click(function () {
+        if (magia > 0) {
+            magia = magia - 1;
+            pontos = pontos + 1;
+            $('#magia').text(magia);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#menos_inteligencia').click(function () {
+        if (inteligencia > 0) {
+            inteligencia = inteligencia - 1;
+            pontos = pontos + 1;
+            $('#inteligencia').text(inteligencia);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#mais_forca').click(function () {
+        if (pontos > 0) {
+            forca = forca + 1;
+            pontos = pontos - 1;
+            $('#forca').text(forca);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#mais_vigor').click(function () {
+        if (pontos > 0) {
+            vigor = vigor + 1;
+            pontos = pontos - 1;
+            $('#vigor').text(vigor);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#mais_agilidade').click(function () {
+        if (pontos > 0) {
+            agilidade = agilidade + 1;
+            pontos = pontos - 1;
+            $('#agilidade').text(agilidade);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#mais_magia').click(function () {
+        if (pontos > 0) {
+            magia = magia + 1;
+            pontos = pontos - 1;
+            $('#magia').text(magia);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#mais_inteligencia').click(function () {
+        if (pontos > 0) {
+            inteligencia = inteligencia + 1;
+            pontos = pontos - 1;
+            $('#inteligencia').text(inteligencia);
+            $('#pontos').text(pontos);
+        }
+    });
+
+    $('#btn_criar').click(function(){
+        var vida_maxima = 100 + (vigor * 5);
+        var vida_atual = vida_maxima;
+        $.ajax({
+            url: 'api/cadastro_personagem_status',
+            type: 'POST',
+            data: {
+                nome: $('#nome').val(),
+                classe_id: $('#classe').val(),
+                nivel: 1,
+                user_id:$.cookie('user_id'),
+                experiencia: 0,
+                pontos: pontos,
+                forca: forca,
+                vigor: vigor,
+                agilidade: agilidade,
+                magia: magia,
+                inteligencia: inteligencia,
+                vida_atual: vida_atual,
+                vida_maxima: vida_maxima
+            },
+            success: function (response) {
+                if (response['erro'] == 'n') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: 'Personagem criado com sucesso!',
+                    })
+
+                    setTimeout(function () {
+                        window.location.href = '/menu_principal';
+                    }, 3000);  
+                }else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro!',
+                        text: response['mensagem'],
+                    });
+                } 
+            }
+        });
+    });
 });

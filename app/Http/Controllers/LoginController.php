@@ -31,7 +31,7 @@ class LoginController extends Controller
             $token->valido_ate = now()->addHours(10);
             $token->save();
 
-            return response()->json(['erro' => 'n', 'mensagem' => 'Login realizado com sucesso', 'token' => $token->token], 200);
+            return response()->json(['erro' => 'n', 'mensagem' => 'Login realizado com sucesso', 'token' => $token->token, 'user_id' => $usuario->id], 200);
         } else {
             return response()->json(['erro' => 's', 'mensagem' => 'Email ou senha incorretos'], 200);
         }
