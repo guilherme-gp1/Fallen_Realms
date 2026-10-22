@@ -97,17 +97,18 @@ $(document).ready(function () {
         }
     });
 
-    $('#btn_criar').click(function(){
+    $('#btn_criar').click(function () {
         var vida_maxima = 100 + (vigor * 5);
         var vida_atual = vida_maxima;
         $.ajax({
             url: 'api/cadastro_personagem_status',
             type: 'POST',
             data: {
-                nome: $('#nome').val(),
+                nome: $('#nome_personagem').val(),
                 classe_id: $('#classe').val(),
+                raca_id: $('#raca').val(),
                 nivel: 1,
-                user_id:$.cookie('user_id'),
+                user_id: $.cookie('user_id'),
                 experiencia: 0,
                 pontos: pontos,
                 forca: forca,
@@ -128,14 +129,20 @@ $(document).ready(function () {
 
                     setTimeout(function () {
                         window.location.href = '/menu_principal';
-                    }, 3000);  
-                }else {
+                    }, 3000);
+                } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Erro!',
                         text: response['mensagem'],
                     });
-                } 
+
+                }
+            },
+            error: function (xhr) {
+                console.log('Status:', xhr.status);
+                console.log('Erros de validação:', xhr.responseJSON?.errors);
+                console.log('Resposta completa:', xhr.responseJSON);
             }
         });
     });

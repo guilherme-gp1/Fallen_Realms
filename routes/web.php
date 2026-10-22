@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PersonagemController;
+use App\Http\Controllers\Personagem_t_hController;
 use App\Http\Controllers\Personagem_StatusController;
 use App\Http\Controllers\HabilidadeController;
 use App\Http\Controllers\TecnicaController;
@@ -24,8 +24,14 @@ Route::get('/luzes', function () {
 })->middleware(LogadoMiddleware::class);
 
 
+
+
 Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);
 Route::get('/criar_personagem', [Personagem_StatusController::class, 'exibir_personagem_html'])->middleware(LogadoMiddleware::class);
+Route::get(
+    '/habilidade_personagem/{id}',
+    [Personagem_t_hController::class, 'exibir_personagem_status_html']
+)->middleware(LogadoMiddleware::class);
 Route::get('/criar_habilidade', [HabilidadeController::class, 'cadastro_habilidade_html']);
 Route::get('/criar_tecnica', [TecnicaController::class, 'cadastro_tecnica_html']);
 Route::get('/criar_classe', [ClassesController::class, 'cadastro_classe_html']);

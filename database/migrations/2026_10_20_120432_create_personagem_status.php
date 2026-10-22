@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             //Dono-personagem
             $table->foreignId('user_id')
-                ->constrained()
+                ->constrained('usuario')
                 ->onDelete('cascade');
             //informações do personagem
             $table->string('nome');

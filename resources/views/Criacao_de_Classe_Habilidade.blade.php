@@ -113,7 +113,7 @@
                                             value="{{ $habilidade->id }}"
                                             id="habilidade_{{ $habilidade->id }}"
                                             name="habilidades[]">
-
+                                        
                                         <label
                                             class="form-check-label fw-bold"
                                             for="habilidade_{{ $habilidade->id }}">
