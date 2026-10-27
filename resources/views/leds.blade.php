@@ -80,6 +80,7 @@
                         Desligar Todas
                     </button>
                 </div>
+                
 
             </div>
         </div>
