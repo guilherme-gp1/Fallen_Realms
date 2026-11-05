@@ -164,7 +164,7 @@ O Fallen Realms está em constante desenvolvimento, com novas funcionalidades se
 
 ## 👨‍💻 Desenvolvedor
 
-Projeto desenvolvido por **[Seu nome]**.
+Projeto desenvolvido por **[Guilherme de Oliveira Pinheiro]**.
 
 ## 📄 Licença
 
