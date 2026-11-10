@@ -24,6 +24,15 @@ Route::get('/luzes', function () {
 })->middleware(LogadoMiddleware::class);
 
 
+Route::get('/jogo', function () {
+    return view('jogo');
+})->middleware(LogadoMiddleware::class);
+
+
+Route::get('/teste', function () {
+    return view('teste_jogo');
+})->middleware(LogadoMiddleware::class);
+
 
 
 Route::get('/cadastro_usuario', [UsuarioController::class, 'cadastro_usuario_html']);
@@ -38,4 +47,5 @@ Route::get('/criar_classe', [ClassesController::class, 'cadastro_classe_html']);
 Route::get('/criar_raca', [RacaController::class, 'cadastro_raca_html']);
 Route::get('/puxar_habilidade', [Classe_HabilidadeController::class, 'cadastro_classe_habilidade_html']);
 Route::get('/login', [LoginController::class, 'login_usuario_html']);
+
 
