@@ -38,7 +38,7 @@ class ExploracaoScene extends Phaser.Scene {
         this.platforms.create(750, 220, 'ground');
 
         this.player = this.physics.add.sprite(100, 450, 'dude');
-        this.player.body.setSize(30, 45);
+        this.player.body.setCircle(18, -2, 13);
 
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
@@ -180,4 +180,6 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
+
 

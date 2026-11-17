@@ -17,7 +17,8 @@ export default defineConfig({
                 'resources/js/cadastro_raca.js',
                 'resources/js/classe_habilidade.js',
                 'resources/js/luzes.js',
-                'resources/js/jogo/main.js'
+                'resources/js/jogo/main.js',
+                'resources/js/jogo/fallen_realms.js'
                 ],
             refresh: true,
             fonts: [

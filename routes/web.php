@@ -49,3 +49,4 @@ Route::get('/puxar_habilidade', [Classe_HabilidadeController::class, 'cadastro_c
 Route::get('/login', [LoginController::class, 'login_usuario_html']);
 
 
+
