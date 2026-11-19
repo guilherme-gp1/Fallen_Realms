@@ -1,339 +1,173 @@
+$(document).ready(function () {
+    let pontos = 5;
 
-import Phaser from 'phaser';
 
-class BatalhaScene extends Phaser.Scene {
+    let forca = 10;
+    let vigor = 10;
+    let agilidade = 10;
+    let magia = 10;
+    let inteligencia = 10;
 
-    constructor() {
-        super('BatalhaScene');
 
-        this.personagem = null;
+    function atualizarAtributos() {
+        $('#forca').text(forca);
+        $('#vigor').text(vigor);
+        $('#agilidade').text(agilidade);
+        $('#magia').text(magia);
+        $('#inteligencia').text(inteligencia);
+        $('#pontos').text(pontos);
+    };
 
-        this.vidaJogador = 0;
-        this.vidaInimigo = 100;
+    $("#mais_forca").click(function () {
+        if (pontos > 0) {
+            forca++;
+            pontos--;
+            atualizarAtributos();
+        } else {
+            alert("Você não tem mais pontos para distribuir.");
+        }
+    });
 
-        this.turno = 'jogador';
-        this.defendendo = false;
-        this.batalhaFinalizada = false;
-    }
+    $("#mais_vigor").click(function () {
+        if (pontos > 0) {
+            vigor++;
+            pontos--;
+            atualizarAtributos();
+        } else {
+            alert("Você não tem mais pontos para distribuir.");
+        }
+    });
 
-    create() {
+    $("#mais_agilidade").click(function () {
+        if (pontos > 0) {
+            agilidade++;
+            pontos--;
+            atualizarAtributos();
+        } else {
+            alert("Você não tem mais pontos para distribuir.");
+        }
+    });
 
-        this.cameras.main.setBackgroundColor('#111116');
+    $("#mais_magia").click(function () {
+        if (pontos > 0) {
+            magia++;
+            pontos--;
+            atualizarAtributos();
+        } else {
+            alert("Você não tem mais pontos para distribuir.");
+        }
+    });
 
-        this.add.text(400, 30, 'FALLEN REALMS', {
-            fontSize: '32px',
-            color: '#e0a526',
-            fontStyle: 'bold'
-        }).setOrigin(0.5);
+    $("#mais_inteligencia").click(function () {
+        if (pontos > 0) {
+            inteligencia++;
+            pontos--;
+            atualizarAtributos();
+        } else {
+            alert("Você não tem mais pontos para distribuir.");
+        }
+    });
 
-        this.statusText = this.add.text(
-            400, 100,
-            'Carregando personagem...',
-            {
-                fontSize: '20px',
-                color: '#ffffff'
+    $("#menos_forca").click(function () {
+        if (forca > 0) {
+            forca--;
+            pontos++;
+            atualizarAtributos();
+        }
+    });
+
+    $("#menos_vigor").click(function () {
+        if (vigor > 0) {
+            vigor--;
+            pontos++;
+            atualizarAtributos();
+        }
+    });
+
+    $("#menos_agilidade").click(function () {
+        if (agilidade > 0) {
+            agilidade--;
+            pontos++;
+            atualizarAtributos();
+        }
+    });
+
+    $("#menos_magia").click(function () {
+        if (magia > 0) {
+            magia--;
+            pontos++;
+            atualizarAtributos();
+        }
+    });
+
+    $("#menos_inteligencia").click(function () {
+        if (inteligencia > 0) {
+            inteligencia--;
+            pontos++;
+            atualizarAtributos();
+        }
+    });
+
+    let vidaMaxima = 50 + (vigor * 5);
+    let vidaAtual = vidaMaxima;
+
+    atualizarAtributos();
+
+    function lerCookie(nome) {
+        let cookies = document.cookie.split(";");
+
+        for (let cookie of cookies) {
+            let partes = cookie.trim().split("=");
+
+            if (partes[0] === nome) {
+                return decodeURIComponent(partes.slice(1).join("="));
             }
-        ).setOrigin(0.5);
+        }
 
-        this.carregarPersonagem();
+        return null;
     }
 
-    async carregarPersonagem() {
+    console.log("ID do usuário:", lerCookie("user_id"));
 
-        try {
+    $("#btn_criar").click(function () {
+        $.ajax({
+            url: 'api/cadastro_personagem',
+            method: 'POST',
+            data: {
+                user_id: lerCookie("user_id"),
+                nome: $('#nome_personagem').val(),
+                raca_id: $('#raca').val(),
+                classe_id: $('#classe').val(),
+                forca: forca,
+                vigor: vigor,
+                agilidade: agilidade,
+                magia: magia,
+                inteligencia: inteligencia,
+                nivel: 1,
+                experiencia: 0,
+                vida_atual: vidaAtual,
+                vida_maxima: vidaMaxima,
+                pontos: pontos
+            },
+            success: function (response) {
+                alert("Personagem criado com sucesso!");
+            },
+            error: function (xhr) {
+                console.log("Status:", xhr.status);
+                console.log("Resposta:", xhr.responseJSON);
 
-            const resposta = await fetch('/api/personagem_jogador', {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Accept': 'application/json'
+                if (xhr.status === 422) {
+                    let erros = xhr.responseJSON.errors;
+
+                    for (let campo in erros) {
+                        console.log(campo + ": " + erros[campo][0]);
+                    }
+
+                    alert("Verifique os campos obrigatórios do personagem.");
+                } else {
+                    alert("Erro ao criar personagem.");
                 }
-            });
-
-            const dados = await resposta.json();
-
-            if (!resposta.ok || dados.erro === 's') {
-                throw new Error(dados.mensagem || 'Erro ao carregar personagem');
             }
-
-            this.personagem = dados.personagem;
-
-            this.vidaJogador = Number(this.personagem.vida_atual);
-
-            this.criarInterface();
-
-        } catch (erro) {
-
-            this.statusText.setText(
-                'Erro: ' + erro.message
-            );
-
-            console.error(erro);
-        }
-    }
-
-    criarInterface() {
-
-        this.statusText.destroy();
-
-        const p = this.personagem;
-
-        // ==========================
-        // PERSONAGEM
-        // ==========================
-
-        this.add.text(50, 100, p.nome, {
-            fontSize: '26px',
-            color: '#e0a526',
-            fontStyle: 'bold'
         });
-
-        this.add.text(50, 140,
-            `${p.classe} | ${p.raca} | Nível ${p.nivel}`, {
-                fontSize: '17px',
-                color: '#ffffff'
-            }
-        );
-
-        this.textoVidaJogador = this.add.text(
-            50, 190,
-            `Vida: ${this.vidaJogador}/${p.vida_maxima}`,
-            {
-                fontSize: '18px',
-                color: '#65d66e'
-            }
-        );
-
-        // ==========================
-        // INIMIGO
-        // ==========================
-
-        this.add.text(570, 100, 'Goblin', {
-            fontSize: '26px',
-            color: '#ff5555',
-            fontStyle: 'bold'
-        });
-
-        this.textoVidaInimigo = this.add.text(
-            570, 140,
-            `Vida: ${this.vidaInimigo}/100`,
-            {
-                fontSize: '18px',
-                color: '#ff7777'
-            }
-        );
-
-        // ==========================
-        // ATRIBUTOS
-        // ==========================
-
-        this.add.text(50, 260, 'ATRIBUTOS', {
-            fontSize: '21px',
-            color: '#e0a526'
-        });
-
-        const atributos = [
-            `Força: ${p.forca}`,
-            `Vigor: ${p.vigor}`,
-            `Agilidade: ${p.agilidade}`,
-            `Magia: ${p.magia}`,
-            `Inteligência: ${p.inteligencia}`
-        ];
-
-        atributos.forEach((atributo, index) => {
-
-            this.add.text(
-                50,
-                300 + (index * 30),
-                atributo,
-                {
-                    fontSize: '17px',
-                    color: '#ffffff'
-                }
-            );
-
-        });
-
-        // ==========================
-        // COMBATE
-        // ==========================
-
-        this.turnoText = this.add.text(
-            400, 260,
-            'SEU TURNO',
-            {
-                fontSize: '24px',
-                color: '#e0a526',
-                fontStyle: 'bold'
-            }
-        ).setOrigin(0.5);
-
-        this.criarBotao(
-            280, 390,
-            'ATACAR',
-            () => this.atacar()
-        );
-
-        this.criarBotao(
-            400, 390,
-            'DEFENDER',
-            () => this.defender()
-        );
-
-        this.criarBotao(
-            520, 390,
-            'HABILIDADE',
-            () => this.habilidade()
-        );
-
-        this.atualizarInterface();
-    }
-
-    criarBotao(x, y, texto, callback) {
-
-        const botao = this.add.text(x, y, texto, {
-            fontSize: '17px',
-            color: '#ffffff',
-            backgroundColor: '#49351b',
-            padding: {
-                x: 15,
-                y: 12
-            }
-        }).setOrigin(0.5);
-
-        botao.setInteractive({ useHandCursor: true });
-
-        botao.on('pointerdown', callback);
-
-        botao.on('pointerover', () => {
-            botao.setStyle({
-                backgroundColor: '#806020'
-            });
-        });
-
-        botao.on('pointerout', () => {
-            botao.setStyle({
-                backgroundColor: '#49351b'
-            });
-        });
-    }
-
-    atacar() {
-
-        if (!this.podeJogar()) return;
-
-        const dano = 15 + Math.floor(Number(this.personagem.forca) / 2);
-
-        this.vidaInimigo -= dano;
-
-        this.finalizarAcao();
-    }
-
-    defender() {
-
-        if (!this.podeJogar()) return;
-
-        this.defendendo = true;
-
-        this.finalizarAcao();
-    }
-
-    habilidade() {
-
-        if (!this.podeJogar()) return;
-
-        const dano = 25 + Math.floor(Number(this.personagem.magia) / 2);
-
-        this.vidaInimigo -= dano;
-
-        this.finalizarAcao();
-    }
-
-    podeJogar() {
-
-        return this.turno === 'jogador'
-            && !this.batalhaFinalizada;
-    }
-
-    finalizarAcao() {
-
-        if (this.vidaInimigo <= 0) {
-
-            this.vidaInimigo = 0;
-            this.batalhaFinalizada = true;
-
-            this.atualizarInterface();
-
-            this.turnoText.setText('VITÓRIA!');
-
-            return;
-        }
-
-        this.atualizarInterface();
-
-        this.turno = 'inimigo';
-
-        this.turnoText.setText('TURNO DO INIMIGO');
-
-        this.time.delayedCall(1000, () => {
-            this.turnoInimigo();
-        });
-    }
-
-    turnoInimigo() {
-
-        if (this.batalhaFinalizada) return;
-
-        let dano = 15;
-
-        if (this.defendendo) {
-            dano = Math.floor(dano / 2);
-            this.defendendo = false;
-        }
-
-        this.vidaJogador -= dano;
-
-        if (this.vidaJogador <= 0) {
-
-            this.vidaJogador = 0;
-            this.batalhaFinalizada = true;
-
-            this.atualizarInterface();
-
-            this.turnoText.setText('DERROTA!');
-
-            return;
-        }
-
-        this.turno = 'jogador';
-
-        this.turnoText.setText('SEU TURNO');
-
-        this.atualizarInterface();
-    }
-
-    atualizarInterface() {
-
-        this.textoVidaJogador.setText(
-            `Vida: ${this.vidaJogador}/${this.personagem.vida_maxima}`
-        );
-
-        this.textoVidaInimigo.setText(
-            `Vida: ${this.vidaInimigo}/100`
-        );
-    }
-}
-
-const config = {
-
-    type: Phaser.AUTO,
-
-    width: 800,
-    height: 600,
-
-    backgroundColor: '#111116',
-
-    scene: [BatalhaScene]
-};
-
-new Phaser.Game(config);
+    });
+});

@@ -26,7 +26,8 @@ class Personagem_StatusController extends Controller
         return view('Criacao_de_Personagem', $data);
     }
 
-    public function criar_personagem_post(Request $request){
+    public function criar_personagem_post(Request $request)
+    {
         $request->validate([
             'user_id' => 'required|integer',
             'nome' => 'required|string|max:255',
@@ -46,7 +47,7 @@ class Personagem_StatusController extends Controller
 
         $personagem = new Personagem_Status();
 
-        if($personagem->where('nome', "=", $request->nome)->exists()){
+        if ($personagem->where('nome', "=", $request->nome)->exists()) {
             return response()->json(['erro' => 's', 'mensagem' => 'Personagem já cadastrado'], 200);
         }
 
@@ -72,5 +73,43 @@ class Personagem_StatusController extends Controller
         } catch (\Exception $e) {
             return response()->json(['erro' => 's', 'mensagem' => 'Erro ao cadastrar personagem: ' . $e->getMessage()], 500);
         }
+    }
+
+    public function personagem_jogador(Request $request)
+    {
+        $token = $request->bearerToken();
+
+        $tokenUsuario = TokenUsuario::where('token', $token)->first();
+
+        if (!$tokenUsuario) {
+            return response()->json([
+                'erro' => 'Usuário não autenticado'
+            ], 401);
+        }
+
+        // Busca o primeiro personagem do usuário
+        $personagem = Personagem_Status::where(
+            'user_id',
+            $tokenUsuario->usuario_id
+        )->first();
+
+        if (!$personagem) {
+            return response()->json([
+                'erro' => 'Nenhum personagem encontrado'
+            ], 404);
+        }
+
+        return response()->json([
+            'id' => $personagem->id,
+            'nome' => $personagem->nome,
+            'vida_atual' => $personagem->vida_atual,
+            'vida_maxima' => $personagem->vida_maxima,
+            'forca' => $personagem->forca,
+            'vigor' => $personagem->vigor,
+            'agilidade' => $personagem->agilidade,
+            'magia' => $personagem->magia,
+            'inteligencia' => $personagem->inteligencia,
+            'nivel' => $personagem->nivel
+        ]);
     }
 }
